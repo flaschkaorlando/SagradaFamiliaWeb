@@ -1,0 +1,131 @@
+ @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+
+
+html{
+background: url("https://i.imgur.com/Gg3XOXY.png") no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+text-align: center;
+font-family: 'Roboto Slab', serif;
+}
+
+h2{
+font-size: 1.5em;
+font-family: 'Roboto Slab', serif;
+}
+
+.boton_personalizado{
+  vertical-align: middle;
+  text-decoration: none;
+  height: 1.9em;
+  padding: 3px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #ffffff;
+  background-color: #00D5E8;
+  border-radius: 15px;
+  border: 4px solid #7092BE;
+font-family: 'Roboto Slab', serif;
+}
+.boton_personalizado:hover{
+    color: #ffffff;
+    background-color: #5EABC9;
+    border: 4px solid #00D5E8;
+
+  }
+
+  .boton_personalizado2{
+    height: 2em;
+    vertical-align: middle;
+    text-decoration: none;
+    padding: 5px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #F24D49;
+    border-radius: 15px;
+    border: 4px solid #D82427;
+    font-family: 'Roboto Slab', serif;
+  }
+  .boton_personalizado2:hover{
+
+      color: #ffffff;
+      background-color: #D82427;
+      border: 4px solid #F24D49;
+
+    }
+
+.boton_personalizado3{
+      vertical-align: middle;
+      text-decoration: none;
+      height: 1.9em;
+      padding: 3px;
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #ffffff;
+      background-color: #EA888E;
+      border-radius: 15px;
+      border: 4px solid #EC2834;
+    font-family: 'Roboto Slab', serif;
+    }
+.boton_personalizado3:hover{
+        color: #EC2834;
+        background-color: #ffffff;
+        border: 4px solid #EC2834;
+
+  }
+
+
+
+
+
+
+.inputPersonalizado{
+border-radius: 15px;
+height: 2em;
+width: 15em;
+font-family: 'Roboto Slab', serif;
+font-size: 1em;
+font-weight: lighter;
+}
+
+.listado{
+border-radius: 15px;
+height: 2em;
+width: 15em;
+font-family: 'Roboto Slab', serif;
+font-size: 1em;
+font-weight: lighter;
+}
+
+
+.comboBox {
+  font-size: 1.2em;
+  height: 2.2em;
+  width:15em;
+  overflow: visible;
+  border-radius: 14px;
+  border: 4px solid #7092BE;
+  background-color: #1FEDDD;
+  font-family: 'Roboto Slab', serif;
+}
+textarea {
+  resize: none;
+  font-size: 1.1em;
+  background-color: inherit;
+  border-radius: 15px;
+  border: 4px solid #7092BE;
+  font-family: 'Roboto Slab', serif;
+  background-color: #99D9EA;
+}
+
+.imagenHiperv{
+  border-radius: 25px;
+  border: 5px solid #7092BE;
+}
+
+.imagenHiperv:hover{
+  border-radius: 25px;
+  border: 5px solid #00D5E8;
+}
