@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="styles.css">
+
+<br>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="./cascada.js"></script>
@@ -37,6 +39,12 @@ var idPac =1;
 
 $.when(turnosPorPaciente(token,idPac)).done(function (turnos){
   var newSelect=document.getElementById('comboTurnos');
+
+  var opt = document.createElement("option");
+  opt.value = 0;
+  opt.innerHTML = "TURNO";
+  newSelect.appendChild(opt);
+
   $.each(turnos, function()
   {
     if(this.Atendido==false){

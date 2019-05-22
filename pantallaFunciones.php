@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="styles.css">
+
+<br>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="./cascada.js"></script>
@@ -9,4 +11,4 @@
 <br>
 <h2><a href="pantallaListar.php" class="boton_personalizado">Mostrar Turnos</a><h2>
 <br>
-<h2><a href="index.php" class="boton_personalizado2">Volver</a><h2>
+<h2><a href="index.php" class="boton_personalizado2">Salir</a><h2>

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="styles.css">
 
+<br>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="./cascada.js"></script>
@@ -37,6 +38,7 @@ else if (isset($_POST['btnBorrar'])){
   $turno = $_POST['idTurnoSeleccionado'];
   $_SESSION['res'] = cancelarTurno($token,$turno);
   $_SESSION['req'] = $req;
+
 }
 
 
@@ -63,19 +65,26 @@ var hora;
 
 if (req =="creando"){
 
-$.when(medicoPorId(token,idMedico)).done(function(medic){
-  medico = medic.Nombre+" "+medic.Apellido;
-  monto = medic.Monto;
+  if(res.IdTurno == null){
 
-  $.when(getPaciente(token,idPaciente)).done(function(pac){
-    paciente = pac.Nombre+" "+pac.Apellido;
-    fechaCompleta = fechaCompleta.split("T");
-    dia = fechaCompleta[0];
-    hora = fechaCompleta[1];
-    document.getElementById('detallesTurno').value ="TURNO CREADO EXITOSAMENTE\nPACIENTE: "+paciente+"\nMÉDICO: "+medico+"\nDÍA: "+dia+"\nHORA: "+hora+"\nMONTO: $"+monto;
-  });
-});
-} else if (req=="borrando"){
+    document.getElementById('detallesTurno').value = res.Message;
+
+  }else{
+
+    $.when(medicoPorId(token,idMedico)).done(function(medic){
+      medico = medic.Nombre+" "+medic.Apellido;
+      monto = medic.Monto;
+
+      $.when(getPaciente(token,idPaciente)).done(function(pac){
+        paciente = pac.Nombre+" "+pac.Apellido;
+        fechaCompleta = fechaCompleta.split("T");
+        dia = fechaCompleta[0];
+        hora = fechaCompleta[1];
+        document.getElementById('detallesTurno').value ="TURNO CREADO EXITOSAMENTE\nPACIENTE: "+paciente+"\nMÉDICO: "+medico+"\nDÍA: "+dia+"\nHORA: "+hora+"\nMONTO: $"+monto;
+    });
+   });
+  }
+} else if (req =="borrando"){
 
   $.when(medicoPorId(token,idMedico)).done(function(medic){
     medico = medic.Nombre+" "+medic.Apellido;
