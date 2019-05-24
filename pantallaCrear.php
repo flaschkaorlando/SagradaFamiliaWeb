@@ -20,21 +20,22 @@ session_start();
   <select id="comboEspecialidades" class="comboBox">
     </select>
     <input type="text" class="inputPersonalizado" name="espView" id="espView" value="" readonly>
-
 <br>
 <br>
   <select id="comboMedicos" class="comboBox">
     </select>
     <input type="text" class="inputPersonalizado" name="medicView" id="medicView" value="" readonly>
     <input type="hidden" name="idMedicoSeleccionado" id="idMedicoSeleccionado" value="valor1" />
-
+<br>
+<br>
+  <input type="text" class="comboBox" name="CartelPrecio" id="CartelPrecio" value="" readonly>
+  <input type="text" class="inputPersonalizado" name="priceView" id="priceView" value="" readonly>
 <br>
 <br>
   <select id="comboDias" class="comboBox">
     </select>
     <input type="text" class="inputPersonalizado" name="dayView" id="dayView" value="" readonly>
     <input type="hidden" name="idDiaSeleccionado" id="idDiaSeleccionado" value="valor1" />
-
 <br>
 <br>
   <select id="comboHoras" class="comboBox">
@@ -84,8 +85,12 @@ var idPac = "<?php echo $_SESSION['id']; ?>";
       document.getElementById('espView').value = e.options[e.selectedIndex].text;
 
       $.when(medicosPorEspecialidad(token,esp)).done(function (medicos){
-        var newSelect=document.getElementById('comboMedicos');
 
+        if(medicos.length==0){
+          document.getElementById('medicView').value = "No hay médicos disponibles";
+        }else{
+
+        var newSelect=document.getElementById('comboMedicos');
         var opt = document.createElement("option");
         opt.value= 0;
         opt.innerHTML = "MEDICO";
@@ -98,12 +103,18 @@ var idPac = "<?php echo $_SESSION['id']; ?>";
           opt.innerHTML = this.Apellido+" "+this.Nombre;
           newSelect.appendChild(opt);
         });
-      });
+        document.getElementById('medicView').value = "";
+      }});
 
-    }
+
+  }
+    document.getElementById('CartelPrecio').value=""
+    document.getElementById('priceView').value=""
 
     document.getElementById('comboMedicos').options.length = 0;
-    document.getElementById('medicView').value = "";
+
+    document.getElementById('CartelPrecio').value="";
+    document.getElementById('priceView').value="";
 
     document.getElementById('comboDias').options.length = 0;
     document.getElementById('dayView').value = "";
@@ -113,23 +124,36 @@ var idPac = "<?php echo $_SESSION['id']; ?>";
 
     document.getElementById('btnCrear').disabled=true;
 
-
 }
 ///CAMBIO MEDICO
   document.getElementById('comboMedicos').onchange = function() {
     var e = document.getElementById("comboMedicos");
-
+    document.getElementById('CartelPrecio').value="Precio";
     var idMed;
     if(e.options[e.selectedIndex].innerHTML=="MEDICO"){
       idMed = 0;
       document.getElementById('medicView').value ="";
+      document.getElementById('CartelPrecio').value="";
+      document.getElementById('priceView').value="";
 
     }else{
       idMed = e.options[e.selectedIndex].value;
+
       document.getElementById('medicView').value = e.options[e.selectedIndex].text;
       document.getElementById('idMedicoSeleccionado').value = idMed;
 
       $.when(diasPorMedico(token,idMed)).done(function (dias){
+
+        if(dias==0){
+          document.getElementById('dayView').value = "No hay días disponibles";
+        }else{
+
+        $.when(medicoPorId(token,idMed)).done(function (medic){
+           var opt = document.getElementById('priceView');
+           opt.value= "$"+medic.Monto;
+           console.log(medic);
+        }
+      );
         var newSelect=document.getElementById('comboDias');
         var index = 0;
         var opt = document.createElement("option");
@@ -146,7 +170,7 @@ var idPac = "<?php echo $_SESSION['id']; ?>";
           newSelect.appendChild(opt);
           index++;
         });
-      });
+      }});
 
     }
 
@@ -194,8 +218,18 @@ var idPac = "<?php echo $_SESSION['id']; ?>";
       document.getElementById('btnCrear').disabled=true;
 
     $.when(horasPorDia(token,idDia,idMed)).done(function (horas){
+
+      if(horas==null){
+        document.getElementById('hourView').value = "No hay horarios disponibles";
+      }else{
       var newSelect=document.getElementById('comboHoras');
       var index =0;
+      var opt = document.createElement("option");
+      opt.value= index;
+      opt.innerHTML = "HORA";
+      newSelect.appendChild(opt);
+      index++;
+
       $.each(horas, function()
       {
         var opt = document.createElement("option");
@@ -204,7 +238,7 @@ var idPac = "<?php echo $_SESSION['id']; ?>";
         newSelect.appendChild(opt);
         index++;
       });
-    });
+    }});
   }
 }
 
